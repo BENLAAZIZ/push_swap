@@ -6,14 +6,14 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-SRC = 
+SRC = ft_split.c ft_atoi.c push_swap.c
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		ar rc $(NAME) $(OBJ)
+		$(CC) $(CFLAGS) $(OBJ) -o $(NAME) 
 
 %.o: %.c push_swap.h
 		$(CC) $(CFLAGS)  -o $@ -c $<
