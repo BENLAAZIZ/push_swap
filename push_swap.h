@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 02:58:26 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/02 10:17:05 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/07 05:17:51 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,19 @@
 // }	t_data;
 
 
-typedef struct s_list
+typedef struct s_stack
 {
-	int				value;
-	int				index;
-	struct s_list	*next;
-} t_list;
+	int				content;
+	struct s_stack	*next;
+} t_stack;
 
 char	**ft_split(char const *s, char c);
 long	ft_atoi(const char *str);
+void	free_t_split(char **array);
+void	ft_print_error();
+t_stack *ft_lstnew(int content);
+void	ft_lstadd_back(t_stack **lst, t_stack *new);
+t_stack	*ft_lstlast(t_stack *lst);
+t_stack	*ft_lstbefore_last(t_stack *lst);
 
 #endif

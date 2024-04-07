@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   free_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/01 23:49:57 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/07 06:28:05 by hben-laz         ###   ########.fr       */
+/*   Created: 2024/04/03 02:07:57 by hben-laz          #+#    #+#             */
+/*   Updated: 2024/04/03 02:08:35 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long	ft_atoi(const char *str)
+void	free_t_split(char **array)
 {
-	int		i;
-	long	f;
-	int		s;
+	int	i;
 
 	i = 0;
-	f = 0;
-	s = 1;
-	if (*(str + i) == '+' || *(str + i) == '-')
+	if (!array)
+		return ;
+	while (array && array[i])
 	{
-		if (*(str + i) == '-')
-			s *= -1;
+		free(array[i]);
 		i++;
 	}
-	while (*(str + i) >= '0' && *(str + i) <= '9' && f < 2147483649)
-	{
-		f = (f * 10) + (*(str + i)) - '0';
-		i++;
-	}
-	return (f * s);
+	free(array);
+}
+
+void	ft_print_error()
+{
+	write(1, "Error\n", 6);
+	exit(1);
 }
