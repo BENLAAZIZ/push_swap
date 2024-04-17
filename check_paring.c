@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 01:24:39 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/09 01:27:50 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:42:56 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int is_duplicated(t_stack *head, int value)
 	return (0);
 }
 
-void	check_nbr(char **buf, t_stack **list)
+void	check_nbr(char **buf, t_stack **stack)
 {
 	int	i;
 	long	nbr;
@@ -55,15 +55,12 @@ void	check_nbr(char **buf, t_stack **list)
 		nbr = ft_atoi(buf[i]);
 		if (nbr <  -2147483648  || nbr > 2147483647)
 			ft_print_error();
-		if(is_duplicated(*list, (int)nbr))
-		{
+		if(is_duplicated(*stack, (int)nbr))
 			ft_print_error();
-			return ;
-		}
 		new = ft_lstnew((int)nbr);
 		if (!new)
 		 	ft_print_error();
-		ft_lstadd_back(list, new);
+		ft_lstadd_back(stack, new);
 		i++;
 	}
 }

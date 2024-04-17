@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-SRC = ft_split.c ft_atoi.c push_swap.c free_function.c list_function.c check_paring.c stack_operation1.c stack_operation2.c
+SRC = ft_split.c ft_atoi.c push_swap.c free_function.c list_function.c check_paring.c opiration_stack.c 
 
 OBJ = $(SRC:.c=.o)
 

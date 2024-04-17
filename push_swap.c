@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 02:58:46 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/09 01:31:56 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:27:31 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void display_list(t_stack *a)
 	printf("\n");
 }
 
-
-int get_arg(char **v, t_stack **list)
+int get_arg(char **v, t_stack **stack)
 {
 	char	**buf;
 	int		i;
@@ -37,26 +36,79 @@ int get_arg(char **v, t_stack **list)
 		buf = ft_split(v[i], ' ');
 		if (!buf)
 			return (1);
-		check_nbr(buf, list);
+		check_nbr(buf, stack);
 		i++;
 	}
 	free_t_split(buf);
 	return (0);
 }
 
-int main(int c, char **v)
+int main(int ac, char **av)
 {
 	t_stack *a;
 	t_stack *b;
 	
 	a = NULL;
 	b = NULL;
-	if (c < 2)
+	if (ac < 2)
 		return (0);
-	get_arg(v, &a);
+	get_arg(av, &a);
 	if(is_sorted(a))
 		return (0);
-	// algorithme(&a);
+	//-----------------------------
+	printf("Init a and b:\n");
+	printf("a : ");
 	display_list(a);
+	printf("b : ");
+	display_list(b);
+	//------------------------------
+	printf("Exec sa: \n");
+	sa(&a, 1);
+	printf("a : ");
+	display_list(a);
+	printf("b : ");
+	display_list(b);
+	//------------------------------------
+	printf("Exec pb pb pb: \n");
+	pb(&a, &b, 1);
+	pb(&a, &b, 1);
+	pb(&a, &b, 1);
+
+	printf("a : ");
+	display_list(a);
+	printf("b : ");
+	display_list(b);
+	//--------------------------------
+	printf("Exec ra rb (equiv. to rr): \n");
+	rr(&a, &b, 1);
+	printf("a : ");
+	display_list(a);
+	printf("b : ");
+	display_list(b);
+		//--------------------------------
+	printf("Exec rra rrb (equiv. to rrr): \n");
+	rrr(&a, &b, 1);
+	printf("a : ");
+	display_list(a);
+	printf("b : ");
+	display_list(b);
+		//------------------------------
+	printf("Exec sa: \n");
+	sa(&a, 1);
+	printf("a : ");
+	display_list(a);
+	printf("b : ");
+	display_list(b);
+//------------------------------------
+	printf("Exec pa pa pa: \n");
+	pa(&a, &b, 1);
+	pa(&a, &b, 1);
+	pa(&a, &b, 1);
+
+	printf("a : ");
+	display_list(a);
+	printf("b : ");
+	display_list(b);
+	// algorithme(&a);
 	return 0;
 }
