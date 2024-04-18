@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 02:58:26 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/17 17:52:07 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/18 22:23:13 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_print_error();
 t_stack *ft_lstnew(int content);
 void	ft_lstadd_back(t_stack **lst, t_stack *new);
 t_stack	*ft_lstlast(t_stack *lst);
+int		size_stack(t_stack *a);
 t_stack	*ft_lstbefore_last(t_stack *lst);
 void	check_nbr(char **buf, t_stack **stack);
 int		is_sorted(t_stack *a);

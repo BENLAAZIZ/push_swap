@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 02:11:28 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/16 13:31:38 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/18 22:22:44 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,19 @@ void	ft_lstadd_back(t_stack **lst, t_stack *new)
 		return ;
 	}
 	ft_lstlast(*lst)->next = new;
+}
+
+int	size_stack(t_stack *a)
+{
+	int		size;
+	
+	if(!a)
+		return (-1);
+	size = 0;
+	while (a)
+	{
+		size++;
+		a = a -> next;
+	}
+	return (size);
 }
