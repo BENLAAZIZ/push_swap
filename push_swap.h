@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 02:58:26 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/18 22:23:13 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:04:23 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-
-
-// typedef struct s_data
-// {
-// 	char	*buffer;
-// }	t_data;
+typedef struct s_donne
+{
+	int	ord;
+	int	cost_a;
+	int	cost_b;
+	int	total;;
+}	t_donne;
 
 
 typedef struct s_stack
 {
 	int				content;
+	int				ord;
 	struct s_stack	*next;
 } t_stack;
 

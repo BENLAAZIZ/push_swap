@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:24:53 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/17 19:02:37 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/21 16:06:57 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 void	sa(t_stack **a, int flag)
 {
 	int	tmp;
+	int ord;
 
 	if (!(*a) || !(*a)->next)
 		return ;
 	tmp = (*a)->content;
+	ord = (*a)->ord;
 	(*a)->content = (*a)->next->content;
+	(*a)->ord = (*a)->next->ord;
 	(*a)->next->content = tmp;
+	(*a)->next->ord = ord;
 	if (flag == 1)
 		write(1, "sa\n", 3);
 }
@@ -28,12 +32,16 @@ void	sa(t_stack **a, int flag)
 void	sb(t_stack **b, int flag)
 {
 	int	tmp;
+	int	ord;
 
 	if (!(*b) || !(*b)->next)
 		return ;
 	tmp = (*b)->content;
+	ord = (*b)->ord;
 	(*b)->content = (*b)->next->content;
+	(*b)->ord = (*b)->next->ord;
 	(*b)->next->content = tmp;
+	(*b)->next->ord = ord;
 	if (flag == 1)
 		write(1, "sb\n", 3);
 }

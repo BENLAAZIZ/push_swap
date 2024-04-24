@@ -2,7 +2,8 @@ NAME = push_swap
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror  -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror  
+#-fsanitize=address
 
 RM = rm -f
 
