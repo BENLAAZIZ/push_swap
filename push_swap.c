@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 02:58:46 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/24 19:26:38 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:13:06 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,168 +110,39 @@ void	get_order(t_stack **a)
 }
 
 
-// cas best mixt **************************************************
-// int get_cost_mix(t_stack *x, int value, int size)
-// {
-// 	int i = 0;
-// 	//1_ get index of the value in the stack
-// 	while (i < size)
-// 	{
-// 		if (x->content == value)
-// 			break ;
-// 		x = x->next;
-// 		i++;
-// 	}
-// 	//2_ get the cost based on the index of the value (if the index is )
-// 	if (i <= (size / 2))
-// 	{
-// 		return (i);
-// 	}
-// 	return (size - i);
-// }
+// move mix to a **************************************************
 
-// int  get_cost_a(int nbr, t_stack *a)
-// {
-// 	t_stack	*ptr;
-// 	int		value;
-// 	int		min;
-// 	int		i;
-
-// 	i = 0;
-// 	ptr = a;
-// 	value = ptr->content;
-// 	min = ptr->content;
-// 	while (ptr)
-// 	{
-// 		if (nbr < ptr->content )
-// 		{
-// 			if (nbr > value || value > ptr->content)
-// 			{
-// 				value = ptr->content;
-// 				i++;
-// 			}
-// 		}
-// 		if (min > ptr->content)
-// 			min = ptr->content;
-// 		ptr = ptr->next;
-// 	}
-// 	if (i == 0)
-// 		return (get_cost_mix(a, min, size_stack(a)));
-// 	else
-// 		return (get_cost_mix(a, value, size_stack(a)));
-// }
-
-// void best_mix(t_stack *b, t_stack *a, t_donne *best)
-// {
-// 	int i;
-// 	int	size;
-
-// 	i = 0;
-// 	best->cost_b = -1;
-// 	best->cost_a = -1;
-// 	size = size_stack(b);
-//     best->total = 100000;
-// 	while (b)
-// 	{
-// 		best->cost_b = get_cost_mix(b, b->content, size);
-// 		best->cost_a = get_cost_a_mix(b->content, a);
-// 		if (best->total > best->cost_a + best->cost_b)
-// 		{
-// 			best->ord = i;
-// 			best->total = best->cost_a + best->cost_b;
-// 		}
-// 		i++;
-// 		b = b->next;
-// 	}
-// }
-// fin cas best mixt  **************************************************
-// cas best rr **************************************************
-int get_cost_rr(t_stack *x, int value, int size)
+int	get_position(t_stack *ptr, int value)
 {
 	int i = 0;
-	//1_ get index of the value in the stack
-	while (i < size)
+	while (ptr)
 	{
-		if (x->content == value)
+		if (ptr->content == value)
 			break ;
-		x = x->next;
 		i++;
 	}
 	return (i);
 }
-int  get_cost_a_rr(int nbr, t_stack *a)
-{
-	t_stack	*ptr;
-	int		value;
-	int		min;
-	int		i;
 
-	i = 0;
-	ptr = a;
-	value = ptr->content;
-	min = ptr->content;
-	while (ptr)
-	{
-		if (nbr < ptr->content )
-		{
-			if (nbr > value || value > ptr->content)
-			{
-				value = ptr->content;
-				i++;
-			}
-		}
-		if (min > ptr->content)
-			min = ptr->content;
-		ptr = ptr->next;
-	}
-	if (i == 0)
-		return (get_cost_rr(a, min, size_stack(a)));
-	else
-		return (get_cost_rr(a, value, size_stack(a)));
-}
-void best_rr(t_stack *b, t_stack *a, t_donne *rr)
-{
-	int i;
-	int	size;
-
-	i = 0;
-	rr->cost_b = -1;
-	rr->cost_a = -1;
-	size = size_stack(b);
-    rr->total = 100000;
-	// while (b)
-	// {
-	// 	rr->cost_b = get_cost_rr(b, b->content, size);
-	// 	rr->cost_a = get_cost_a_mix(b->content, a);
-	// 	if (rr->total > rr->cost_a + rr->cost_b)
-	// 	{
-	// 		rr->ord = i;
-	// 		rr->total = rr->cost_a + rr->cost_b;
-	// 	}
-	// 	i++;
-	// 	b = b->next;
-	// }
-	rr->cost_b = get_cost_rr(b, b->content, size);
-	rr->cost_a = get_cost_a_rr(b->content, a);
-	printf("\n cost_b rr %d\n", rr->cost_b);
-	printf("\n cost_a rr %d\n", rr->cost_a);
-
-}
-// fin cas best rr **************************************************
-
+// // fin move mix to a **************************************************
 void	move_action(t_stack **a, t_stack **b)
 {
-	// t_donne	*mix;
+	t_donne	mix;
 	t_donne	rr;
-	// t_donne	*rrr;
-	t_stack *ptr;
-	ptr = *a;
+	t_donne	rrr;
+
+	while (b)
+	{
+		best_mix(*b, *a, &mix);
 		best_rr(*b, *a, &rr);
-	// while (b)
-	// {
-	// 	best_mix(*b, *a, mix);
-	// 	// move_to_a()
-	// }
+		best_rrr(*b, *a, &rrr);
+		if (mix.total < rr.total && mix.total < rrr.total)
+			move_mix_a(a, b, &mix);
+		else if (rr.total < mix.total && rr.total < rrr.total)
+			move_rr_a(a, b, &rr);
+		else
+			move_rrr_a(a, b, &rrr);
+	}
 	
 }
 
@@ -298,8 +169,6 @@ void	sort_all(t_stack **a, t_stack **b)
 	}
 	sort_3(a);
 	move_action(a, b);
-		// display_list(*a);
-		// display_list(*b);
 }
 
 void	algorithme(t_stack **a, t_stack **b)
@@ -309,17 +178,12 @@ void	algorithme(t_stack **a, t_stack **b)
 	if (!(*a) || !(*a)->next)
 		return ;
 	size = size_stack(*a);
-	// printf("\n------ size : %d -----\n", size);
 	if (size == 2)
 		sort_2(a);
 	else if (size == 3)
 		sort_3(a);
 	else 
-	{
-	sort_all(a, b);
-		// display_list(*a);
-		// display_list(*b);
-	}
+		sort_all(a, b);
 }
 
 int main(int ac, char **av)

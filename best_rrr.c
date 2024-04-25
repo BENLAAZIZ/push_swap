@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   best_rr.c                                          :+:      :+:    :+:   */
+/*   best_rrr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 19:35:10 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/25 21:29:47 by hben-laz         ###   ########.fr       */
+/*   Created: 2024/04/25 13:23:47 by hben-laz          #+#    #+#             */
+/*   Updated: 2024/04/25 21:12:42 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // cas best rr **************************************************
-int get_cost_rr(t_stack *x, int value, int size)
+int get_cost_rrr(t_stack *x, int value, int size)
 {
 	int i = 0;
 	while (i < size)
 	{
+		if (i == 0 && x->content == value)
+			return (0);
 		if (x->content == value)
 			break ;
 		x = x->next;
 		i++;
 	}
-	return (i);
+	return (size - i);
 }
-int  get_cost_a_rr(int nbr, t_stack *a,  t_donne *best_rr)
+
+int  get_cost_a_rrr(int nbr, t_stack *a, t_donne *rrr)
 {
 	t_stack	*ptr;
 	int		value;
@@ -52,48 +55,48 @@ int  get_cost_a_rr(int nbr, t_stack *a,  t_donne *best_rr)
 	}
 	if (i == 0)
 	{
-		best_rr->value_a_modif = min;
-		return (get_cost_mix(a, min, size_stack(a)));
+		rrr->value_a_modif = min;
+		return (get_cost_rrr(a, min, size_stack(a)));
 	}
 	else
 	{
-		best_rr->value_a_modif = value;
-		return (get_cost_mix(a, value, size_stack(a)));
+		rrr->value_a_modif = value;
+		return (get_cost_rrr(a, value, size_stack(a)));
 	}
 }
 
-void best_rr(t_stack *b, t_stack *a, t_donne *best_rr)
+void best_rrr(t_stack *b, t_stack *a, t_donne *rrr)
 {
 	int	size;
 	int	ca;
 	int	cb;
 
-	best_rr->cost_b = -1;
-	best_rr->cost_a = -1;
+	rrr->cost_b = -1;
+	rrr->cost_a = -1;
 	ca = -1;
 	cb = -1;
 	size = size_stack(b);
-    best_rr->total = 100000;
+    rrr->total = 100000;
 	while (b)
 	{
-		cb = get_cost_rr(b, b->content, size);
-		ca = get_cost_a_rr(b->content, a, best_rr);
-		if (best_rr->total > ca || best_rr->total > cb)
+		cb = get_cost_rrr(b, b->content, size);
+		ca = get_cost_a_rrr(b->content, a, rrr);
+		if (rrr->total > ca || rrr->total > cb)
 		{
-			best_rr->value_b = b->content;
-			best_rr->value_a = best_rr->value_a_modif;
-			best_rr->cost_b = cb;
-			best_rr->cost_a = ca;
+			rrr->value_b = b->content;
+			rrr->value_a = rrr->value_a_modif;
+			rrr->cost_b = cb;
+			rrr->cost_a = ca;
 			if (cb > ca)
-				best_rr->total = cb;
+				rrr->total = cb;
 			else
-				best_rr->total = ca;
+				rrr->total = ca;
 		}
 		b = b->next;
 	}
 }
 
-void	move_rr_a(t_stack **a, t_stack **b, t_donne *best_rr)
+void	move_rrr_a(t_stack **a, t_stack **b, t_donne *best_rrr)
 {
 	int	i;
 	int size_a;
@@ -104,35 +107,34 @@ void	move_rr_a(t_stack **a, t_stack **b, t_donne *best_rr)
 	i = 0;
 	size_a = size_stack(*a);
 	size_b = size_stack(*b);
-	pos_a = get_position(*a, best_rr->value_a);
-	pos_b = get_position(*a, best_rr->value_b);
-	if (best_rr->cost_a > best_rr->cost_b)
+	pos_a = get_position(*a, best_rrr->value_a);
+	pos_b = get_position(*a, best_rrr->value_b);
+	if (best_rrr->cost_a > best_rrr->cost_b)
 	{
-		while (i < best_rr->cost_b)
+		while (i < best_rrr->cost_b)
 		{
-			rr(a, b, 1);
+			rrr(a, b, 1);
 			i++;
 		}
-		while (i < best_rr->cost_a)
+		while (i < best_rrr->cost_a)
 		{
-			ra(a, 1);
+			rra(a, 1);
 			i++;
 		}
 	}
 	else 
 	{
-		while (i < best_rr->cost_a)
+		while (i < best_rrr->cost_a)
 		{
-			rr(a, b, 1);
+			rrr(a, b, 1);
 			i++;
 		}
-		while (i < best_rr->cost_b)
+		while (i < best_rrr->cost_b)
 		{
-			rb(b, 1);
+			rrb(b, 1);
 			i++;
 		}
 	}
-
 	pa(a, b, 1);
 }
-// fin cas best rr **************************************************
+// fin cas rrr rrr **************************************************
