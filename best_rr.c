@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 19:35:10 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/25 21:29:47 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:01:57 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 // cas best rr **************************************************
 int get_cost_rr(t_stack *x, int value, int size)
 {
-	int i = 0;
+	int i;
+
+	i = 0;
 	while (i < size)
 	{
 		if (x->content == value)
@@ -78,7 +80,7 @@ void best_rr(t_stack *b, t_stack *a, t_donne *best_rr)
 	{
 		cb = get_cost_rr(b, b->content, size);
 		ca = get_cost_a_rr(b->content, a, best_rr);
-		if (best_rr->total > ca || best_rr->total > cb)
+		if (best_rr->total > ca && best_rr->total > cb)
 		{
 			best_rr->value_b = b->content;
 			best_rr->value_a = best_rr->value_a_modif;
@@ -105,7 +107,7 @@ void	move_rr_a(t_stack **a, t_stack **b, t_donne *best_rr)
 	size_a = size_stack(*a);
 	size_b = size_stack(*b);
 	pos_a = get_position(*a, best_rr->value_a);
-	pos_b = get_position(*a, best_rr->value_b);
+	pos_b = get_position(*b, best_rr->value_b);
 	if (best_rr->cost_a > best_rr->cost_b)
 	{
 		while (i < best_rr->cost_b)
@@ -132,7 +134,6 @@ void	move_rr_a(t_stack **a, t_stack **b, t_donne *best_rr)
 			i++;
 		}
 	}
-
 	pa(a, b, 1);
 }
 // fin cas best rr **************************************************

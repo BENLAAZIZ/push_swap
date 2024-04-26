@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 13:23:47 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/25 21:12:42 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/26 20:52:57 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 // cas best rr **************************************************
 int get_cost_rrr(t_stack *x, int value, int size)
 {
-	int i = 0;
+	int i;
+	
+	i = 0;
 	while (i < size)
 	{
 		if (i == 0 && x->content == value)
@@ -81,7 +83,7 @@ void best_rrr(t_stack *b, t_stack *a, t_donne *rrr)
 	{
 		cb = get_cost_rrr(b, b->content, size);
 		ca = get_cost_a_rrr(b->content, a, rrr);
-		if (rrr->total > ca || rrr->total > cb)
+		if (rrr->total > ca && rrr->total > cb)
 		{
 			rrr->value_b = b->content;
 			rrr->value_a = rrr->value_a_modif;
@@ -108,7 +110,7 @@ void	move_rrr_a(t_stack **a, t_stack **b, t_donne *best_rrr)
 	size_a = size_stack(*a);
 	size_b = size_stack(*b);
 	pos_a = get_position(*a, best_rrr->value_a);
-	pos_b = get_position(*a, best_rrr->value_b);
+	pos_b = get_position(*b, best_rrr->value_b);
 	if (best_rrr->cost_a > best_rrr->cost_b)
 	{
 		while (i < best_rrr->cost_b)

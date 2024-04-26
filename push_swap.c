@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 02:58:46 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/25 22:13:06 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/26 22:41:29 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void display_list(t_stack *a)
 {
 	while(a)
 	{
-		printf(" ( content : %d order : (%d))\n", a->content, a->ord);
+		// printf(" ( content : %d order : (%d))\n", a->content, a->ord);
+		printf("|   %d    (%d)      |\n", a->content, a->ord);
 		a = a->next;
 	}
 	printf("\n");
@@ -120,6 +121,7 @@ int	get_position(t_stack *ptr, int value)
 		if (ptr->content == value)
 			break ;
 		i++;
+		ptr = ptr->next;
 	}
 	return (i);
 }
@@ -130,18 +132,28 @@ void	move_action(t_stack **a, t_stack **b)
 	t_donne	mix;
 	t_donne	rr;
 	t_donne	rrr;
-
-	while (b)
+	
+	rr.total =  10000;
+	rrr.total =  10000;
+	// mix.total =  10000;
+	while (b && *b)
 	{
+		puts("----------------------------------");
+		display_list(*a);
+		display_list(*b);
 		best_mix(*b, *a, &mix);
-		best_rr(*b, *a, &rr);
-		best_rrr(*b, *a, &rrr);
-		if (mix.total < rr.total && mix.total < rrr.total)
 			move_mix_a(a, b, &mix);
-		else if (rr.total < mix.total && rr.total < rrr.total)
-			move_rr_a(a, b, &rr);
-		else
-			move_rrr_a(a, b, &rrr);
+		// best_rr(*b, *a, &rr);
+		// 	move_rr_a(a, b, &rr);
+		//******************************
+		// best_rr(*b, *a, &rr);
+		// best_rrr(*b, *a, &rrr);
+		// if (mix.total < rr.total && mix.total < rrr.total)
+		// 	move_mix_a(a, b, &mix);
+		// else if (rr.total < mix.total && rr.total < rrr.total)
+		// 	move_rr_a(a, b, &rr);
+		// else
+		// 	move_rrr_a(a, b, &rrr);
 	}
 	
 }
@@ -168,6 +180,9 @@ void	sort_all(t_stack **a, t_stack **b)
 		size--;
 	}
 	sort_3(a);
+	// display_list(*a);
+	// display_list(*b);
+	// pause();
 	move_action(a, b);
 }
 
