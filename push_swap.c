@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 02:58:46 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/26 22:41:29 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:50:24 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void display_list(t_stack *a)
 	while(a)
 	{
 		// printf(" ( content : %d order : (%d))\n", a->content, a->ord);
-		printf("|   %d    (%d)      |\n", a->content, a->ord);
+		// printf("|   %d    (%d)      |\n", a->content, a->ord);
+		printf("%d\n", a->content);
 		a = a->next;
 	}
 	printf("\n");
@@ -55,6 +56,20 @@ int	get_max(t_stack *a)
 		a = a->next;
 	}
 	return (max);
+}
+
+int	get_min(t_stack *a)
+{
+	int min;
+	
+	min = a->content;
+	while (a)
+	{
+		if (min > a->content)
+			min = a->content;
+		a = a -> next;
+	}
+	return (min);
 }
 
 
@@ -138,11 +153,11 @@ void	move_action(t_stack **a, t_stack **b)
 	// mix.total =  10000;
 	while (b && *b)
 	{
-		puts("----------------------------------");
-		display_list(*a);
-		display_list(*b);
+		// puts("----------------------------------");
+		// display_list(*a);
+		// display_list(*b);
 		best_mix(*b, *a, &mix);
-			move_mix_a(a, b, &mix);
+		move_mix_a(a, b, &mix);
 		// best_rr(*b, *a, &rr);
 		// 	move_rr_a(a, b, &rr);
 		//******************************
@@ -155,7 +170,6 @@ void	move_action(t_stack **a, t_stack **b)
 		// else
 		// 	move_rrr_a(a, b, &rrr);
 	}
-	
 }
 
 void	sort_all(t_stack **a, t_stack **b)
@@ -167,10 +181,13 @@ void	sort_all(t_stack **a, t_stack **b)
 	ptr = *a;
 	size = size_stack(*a);
 	mid = size / 2;
+	// printf("mid: %d\n", mid);
 	get_order(a);
+	// display_list(*a);
+	// puts("--------");
 	while (size > 3)
 	{
-		if ((*a)->ord < mid)
+		if ((*a)->ord <= mid)
 			pb(a, b, 1);
 		else
 		{
@@ -214,7 +231,20 @@ int main(int ac, char **av)
 	if(is_sorted(a))
 		return (0);
 	algorithme(&a, &b);
-	display_list(a);
-	display_list(b);
+	int min = get_min(a);
+	int pos = get_position(a, min);
+	int size = size_stack(a);
+	if(pos <= (size / 2))
+	{
+		while(min != a->content)
+			ra(&a, 1);
+	}
+	else
+	{
+		while(min != a->content)
+			rra(&a, 1);
+	}
+	// display_list(a);
+	
 	return 0;
 }

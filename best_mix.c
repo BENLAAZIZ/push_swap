@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 19:17:55 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/26 22:38:01 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:53:22 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,24 @@ int get_cost_mix(t_stack *x, int value, int size)
 	{
 		if (x->content == value)
 			break ;
-		x = x->next;
 		i++;
+		x = x->next;
 	}
 	if (i <= (size / 2))
 		return (i);
 	return (size - i);
 }
+
+// int get_cost_mix(t_stack *x, int value, int size)
+// {
+// 	int pos = get_position(x, value); //2 
+// 	int index = size - pos; // 9 - 2 = 7;
+
+// 	if(index < size - pos)
+// 		return index;
+// 	else
+// 		return (size - pos);
+// }
 
 int  get_cost_a_mix(int nbr, t_stack *a, t_donne *mix)
 {
@@ -42,28 +53,21 @@ int  get_cost_a_mix(int nbr, t_stack *a, t_donne *mix)
 	min = ptr->content;
 	while (ptr)
 	{
-		if (nbr < ptr->content )
+		if (nbr < ptr->content)
 		{
-			if (nbr > value || value > ptr->content)
+			if (nbr > value || value >= ptr->content)
 			{
 				value = ptr->content;
 				i++;
 			}
 		}
-		if (min > ptr->content)
-			min = ptr->content;
 		ptr = ptr->next;
 	}
 	if (i == 0)
-	{
-		mix->value_a_modif = min;
-		return (get_cost_mix(a, min, size_stack(a)));
-	}
+		mix->value_a_modif = get_min(a);
 	else
-	{
-		mix->value_a_modif = value;
-		return (get_cost_mix(a, value, size_stack(a)));
-	}
+		mix->value_a_modif = value;		
+	return (get_cost_mix(a, mix->value_a_modif, size_stack(a)));
 }
 
 void best_mix(t_stack *b, t_stack *a, t_donne *mix)
@@ -78,13 +82,19 @@ void best_mix(t_stack *b, t_stack *a, t_donne *mix)
 	cb = -1;
 	size = size_stack(b);
     mix->total = 100000;
+	t_stack *tmp = b;
 	while (b)
 	{
-		cb = get_cost_mix(b, b->content, size);
-		ca = get_cost_a_mix(b->content, a, mix);
+		int val_b = b->content;
+		cb = get_cost_mix(tmp, val_b, size);
+		ca = get_cost_a_mix(val_b, a, mix);
+		// printf("***********8**\n")
+		// display_list(a);
+		// printf("***********8**\n");
+
 		if (mix->total > ca + cb)
 		{
-			mix->value_b = b->content;
+			mix->value_b = val_b;
 			mix->value_a = mix->value_a_modif;
 			mix->cost_b = cb;
 			mix->cost_a = ca;
@@ -92,6 +102,13 @@ void best_mix(t_stack *b, t_stack *a, t_donne *mix)
 		}
 		b = b->next;
 	}
+	// printf(" \n value b : %d\n", mix->value_b);
+	// printf(" \n value a : %d\n", mix->value_a);
+	// printf(" \n cost_a : %d\n", mix->cost_a);
+	// printf(" \n cost_b : %d\n", mix->cost_b);
+	// // printf(" \n pos_a : %d\n", mix->pos_a);
+	// // printf(" \n pos_b : %d\n", mix->pos_b);
+	// printf(" \n mix->total : %d\n", mix->total);
 	
 }
 
@@ -108,12 +125,6 @@ void	move_mix_a(t_stack **a, t_stack **b, t_donne *mix)
 	size_b = size_stack(*b);
 	pos_a = get_position(*a, mix->value_a);
 	pos_b = get_position(*b, mix->value_b);
-	printf(" \n value b : %d\n", mix->value_b);
-	printf(" \n value a : %d\n", mix->value_a);
-	printf(" \n cost_a : %d\n", mix->cost_a);
-	printf(" \n cost_b : %d\n", mix->cost_b);
-	printf(" \n pos_a : %d\n", pos_a);
-	printf(" \n pos_b : %d\n", pos_b);
 	if (pos_a <= size_a / 2)
 	{
 		while (i < mix->cost_a)
@@ -143,7 +154,7 @@ void	move_mix_a(t_stack **a, t_stack **b, t_donne *mix)
 	{
 		while (i < mix->cost_b)
 		{
-			rra(b, 1);
+			rrb(b, 1);
 			i++;
 		}
 	}

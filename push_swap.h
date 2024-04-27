@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 02:58:26 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/26 20:50:51 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/27 16:38:41 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ void	best_rrr(t_stack *b, t_stack *a, t_donne *best_rrr);
 int		get_cost_rrr(t_stack *x, int value, int size);
 int 	get_cost_a_rrr(int nbr, t_stack *a, t_donne *best_rrr);
 void	move_rrr_a(t_stack **a, t_stack **b, t_donne *best_rrr);
-
+int	get_min(t_stack *a);
+void display_list(t_stack *a);
 #endif
