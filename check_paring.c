@@ -6,11 +6,32 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 01:24:39 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 18:28:52 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/28 22:36:49 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+
+int get_arg(char **v, t_stack **stack)
+{
+	char	**buf;
+	int		i;
+
+	i = 1;
+	if (!v)
+		return(0);
+	while (v[i])
+	{
+		buf = ft_split(v[i], ' ');
+		if (!buf)
+			return (1);
+		check_nbr(buf, stack);
+		i++;
+	}
+	free_t_split(buf);
+	return (0);
+}
 
 int	ft_isdigit(char *s)
 {

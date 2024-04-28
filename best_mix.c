@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 19:17:55 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 18:22:14 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/28 21:34:14 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,30 +59,22 @@ int  get_cost_a_mix(int nbr, t_stack *a, t_donne *mix)
 
 void best_mix(t_stack *b, t_stack *a, t_donne *mix)
 {
-	int	size;
-	int	ca;
-	int	cb;
-	int val_b;
 	t_stack *tmp;
+	t_var	var;
 
-	mix->cost_b = -1;
-	mix->cost_a = -1;
-	ca = -1;
-	cb = -1;
-	size = size_stack(b);
-    mix->total = 100000;
+	best_mix_init(b, mix, &var);
 	tmp = b;
 	while (b)
 	{
-		val_b = b->content;
-		cb = get_cost_mix(tmp, val_b, size);
-		ca = get_cost_a_mix(val_b, a, mix);
-		if (mix->total > ca + cb)
+		var.val_b = b->content;
+		var.cb = get_cost_mix(tmp, var.val_b, var.size);
+		var.ca = get_cost_a_mix(var.val_b, a, mix);
+		if (mix->total > var.ca + var.cb)
 		{
-			mix->value_b = val_b;
+			mix->value_b = var.val_b;
 			mix->value_a = mix->value_a_modif;
-			mix->cost_b = cb;
-			mix->cost_a = ca;
+			mix->cost_b = var.cb;
+			mix->cost_a = var.ca;
 			mix->total = mix->cost_a + mix->cost_b;
 		}
 		b = b->next;
@@ -119,6 +111,5 @@ void	move_mix_a(t_stack **a, t_stack **b, t_donne *mix)
 {
 	mix->pos_a = get_position(*a, mix->value_a);
 	mix->pos_b = get_position(*b, mix->value_b);
-
 	move_mix_b_to_a(a, b, mix, 0);
 }

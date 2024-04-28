@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 18:36:14 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 18:37:24 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/28 19:30:10 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,4 @@ void	rrb(t_stack **b, int flag)
 	*b = last;
 	if (flag == 1)
 		write(1, "rrb\n", 4);
-}
-
-void	rrr(t_stack **a, t_stack **b, int flag)
-{
-	rra(a, 0);
-	rrb(b, 0);
-	if (flag == 1)
-		write(1, "rrr\n", 4);
 }

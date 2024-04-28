@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 13:23:47 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 18:23:29 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/28 22:35:29 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,36 +57,39 @@ int  get_cost_a_rrr(int nbr, t_stack *a, t_donne *rrr)
 	return (get_cost_rrr(a, rrr->value_a_modif, size_stack(a)));
 }
 
+void	best_rrr_init(t_stack *b, t_donne *best_rrr, t_var *var)
+{
+	
+	best_rrr->cost_b = -1;
+	best_rrr->cost_a = -1;
+	var->ca = -1;
+	var->cb = -1;
+	var->size = size_stack(b);
+    best_rrr->total = 100000;
+}
+
 void best_rrr(t_stack *b, t_stack *a, t_donne *rrr)
 {
-	int	size;
-	int	ca;
-	int	cb;
-	int	val_b;
 	t_stack *tmp;
+	t_var	var;
 
-	rrr->cost_b = -1;
-	rrr->cost_a = -1;
-	ca = -1;
-	cb = -1;
-	size = size_stack(b);
+	best_rrr_init(b, rrr, &var);
 	tmp = b;
-    rrr->total = 100000;
 	while (b)
 	{
-		val_b = b->content;
-		cb = get_cost_rrr(tmp, val_b, size);
-		ca = get_cost_a_rrr(val_b, a, rrr);
-		if (rrr->total > ca && rrr->total > cb)
+		var.val_b = b->content;
+		var.cb = get_cost_rrr(tmp, var.val_b, var.size);
+		var.ca = get_cost_a_rrr(var.val_b, a, rrr);
+		if (rrr->total > var.ca && rrr->total > var.cb)
 		{
-			rrr->value_b = val_b;
+			rrr->value_b = var.val_b;
 			rrr->value_a = rrr->value_a_modif;
-			rrr->cost_b = cb;
-			rrr->cost_a = ca;
-			if (cb > ca)
-				rrr->total = cb;
+			rrr->cost_b = var.cb;
+			rrr->cost_a = var.ca;
+			if (var.cb > var.ca)
+				rrr->total = var.cb;
 			else
-				rrr->total = ca;
+				rrr->total = var.ca;
 		}
 		b = b->next;
 	}
