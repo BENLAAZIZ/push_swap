@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 01:24:39 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/16 12:42:56 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:28:52 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_isdigit(char *s)
 	return (1);
 }
 
-int is_duplicated(t_stack *head, int value)
+int	is_duplicated(t_stack *head, int value)
 {
 	while(head)
 	{
@@ -43,10 +43,10 @@ int is_duplicated(t_stack *head, int value)
 
 void	check_nbr(char **buf, t_stack **stack)
 {
-	int	i;
+	int		i;
 	long	nbr;
-	t_stack *new;
-	
+	t_stack	*new;
+
 	i = 0;
 	while (buf[i])
 	{
@@ -65,7 +65,7 @@ void	check_nbr(char **buf, t_stack **stack)
 	}
 }
 
-int is_sorted(t_stack *a)
+int	is_sorted(t_stack *a)
 {
 	if(!a || !a->next)
 		return (1);

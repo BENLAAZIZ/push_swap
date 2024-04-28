@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 02:58:26 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/27 16:38:41 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:39:43 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_donne
 	int	value_a_modif;
 	int	value_a;
 	int	value_b;
+	int pos_a;
+	int pos_b;
 	int	cost_a;
 	int	cost_b;
 	int	total;

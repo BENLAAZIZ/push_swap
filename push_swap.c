@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 02:58:46 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 16:03:43 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:19:17 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void display_list(t_stack *a)
 {
 	while(a)
 	{
-		// printf(" ( content : %d order : (%d))\n", a->content, a->ord);
-		// printf("|   %d    (%d)      |\n", a->content, a->ord);
 		printf("|  %d  |\n", a->content);
 		a = a->next;
 	}
@@ -143,40 +141,12 @@ void	move_action(t_stack **a, t_stack **b)
 	t_donne	mix;
 	t_donne	rr;
 	t_donne	rrr;
-	
-	// rr.total =  10000;
-	// rrr.total =  1000000000;
-	// mix.total =  10000;
 
 	while (b && *b)
 	{
-			// puts("------- stack A --------");
-			// display_list(*a);
-			// puts("------- stack B --------");
-			// display_list(*b);
 		best_mix(*b, *a, &mix);
-			// puts("------- best mix --------");
-			// printf("\n mix->valu_b : %d\n", mix.value_b);
-			// printf("\n mix->valu_a : %d\n", mix.value_a);
-			// printf("\n mix->cost_b : %d\n", mix.cost_b);
-			// printf("\n mix->cost_a : %d\n", mix.cost_a);
-			// printf("\n mix->total : %d\n\n", mix.total);
 		best_rr(*b, *a, &rr);
-			// puts("------- best rr --------");
-			// printf("\n rr->valu_b : %d\n", rr.value_b);
-			// printf("\n rr->valu_a : %d\n", rr.value_a);
-			// printf("\n rr->cost_b : %d\n", rr.cost_b);
-			// printf("\n rr->cost_a : %d\n", rr.cost_a);
-			// printf("\n rr->total : %d\n\n", rr.total);
 		best_rrr(*b, *a, &rrr);
-		// 	puts("------- best rrr --------");
-		// 	printf("\n rrr->valu_b : %d\n", rrr.value_b);
-		// 	printf("\n rrr->valu_a : %d\n", rrr.value_a);
-		// 	printf("\n rrr->cost_b : %d\n", rrr.cost_b);
-		// 	printf("\n rrr->cost_a : %d\n", rrr.cost_a);
-		// 	printf("\n rrr->total : %d\n\n", rrr.total);
-		// puts("===============================");
-
 		if (rr.total <= mix.total && rr.total <= rrr.total)
 			move_rr_a(a, b, &rr);
 		else if (rrr.total <= mix.total && rrr.total <= rr.total)

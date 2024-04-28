@@ -6,13 +6,13 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 02:11:28 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/18 22:22:44 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:32:32 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack *ft_lstnew(int content)
+t_stack	*ft_lstnew(int content)
 {
 	t_stack	*node;
 	
@@ -21,13 +21,13 @@ t_stack *ft_lstnew(int content)
 		return (NULL);
 	node->content = content;
 	node->next = NULL;
-	return  (node);
+	return (node);
 }
 
 t_stack	*ft_lstlast(t_stack *lst)
 {
 	t_stack	*last;
-	
+
 	if (!lst)
 		return (NULL);
 	last = lst;
@@ -39,7 +39,7 @@ t_stack	*ft_lstlast(t_stack *lst)
 t_stack	*ft_lstbefore_last(t_stack *lst)
 {
 	t_stack	*last;
-	
+
 	if (!lst)
 		return (NULL);
 	last = lst;
