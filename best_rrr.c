@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 13:23:47 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/26 20:52:57 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/28 14:50:25 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,19 @@ int  get_cost_a_rrr(int nbr, t_stack *a, t_donne *rrr)
 	{
 		if (nbr < ptr->content )
 		{
-			if (nbr > value || value > ptr->content)
+			if (nbr > value || value >= ptr->content)
 			{
 				value = ptr->content;
 				i++;
 			}
 		}
-		if (min > ptr->content)
-			min = ptr->content;
 		ptr = ptr->next;
 	}
 	if (i == 0)
-	{
-		rrr->value_a_modif = min;
-		return (get_cost_rrr(a, min, size_stack(a)));
-	}
+		rrr->value_a_modif = get_min(a);
 	else
-	{
 		rrr->value_a_modif = value;
-		return (get_cost_rrr(a, value, size_stack(a)));
-	}
+	return (get_cost_rrr(a, rrr->value_a_modif, size_stack(a)));
 }
 
 void best_rrr(t_stack *b, t_stack *a, t_donne *rrr)
@@ -72,20 +65,23 @@ void best_rrr(t_stack *b, t_stack *a, t_donne *rrr)
 	int	size;
 	int	ca;
 	int	cb;
+	int	val_b;
 
 	rrr->cost_b = -1;
 	rrr->cost_a = -1;
 	ca = -1;
 	cb = -1;
 	size = size_stack(b);
+	t_stack *tmp = b;
     rrr->total = 100000;
 	while (b)
 	{
-		cb = get_cost_rrr(b, b->content, size);
-		ca = get_cost_a_rrr(b->content, a, rrr);
+		val_b = b->content;
+		cb = get_cost_rrr(tmp, val_b, size);
+		ca = get_cost_a_rrr(val_b, a, rrr);
 		if (rrr->total > ca && rrr->total > cb)
 		{
-			rrr->value_b = b->content;
+			rrr->value_b = val_b;
 			rrr->value_a = rrr->value_a_modif;
 			rrr->cost_b = cb;
 			rrr->cost_a = ca;

@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 19:17:55 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/27 17:53:22 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/27 21:01:27 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ int  get_cost_a_mix(int nbr, t_stack *a, t_donne *mix)
 {
 	t_stack	*ptr;
 	int		value;
-	int		min;
+	// int		min;
 	int		i;
 
 	i = 0;
 	ptr = a;
 	value = ptr->content;
-	min = ptr->content;
+	// min = ptr->content;
 	while (ptr)
 	{
 		if (nbr < ptr->content)
@@ -75,6 +75,7 @@ void best_mix(t_stack *b, t_stack *a, t_donne *mix)
 	int	size;
 	int	ca;
 	int	cb;
+	int val_b;
 
 	mix->cost_b = -1;
 	mix->cost_a = -1;
@@ -85,13 +86,9 @@ void best_mix(t_stack *b, t_stack *a, t_donne *mix)
 	t_stack *tmp = b;
 	while (b)
 	{
-		int val_b = b->content;
+		val_b = b->content;
 		cb = get_cost_mix(tmp, val_b, size);
 		ca = get_cost_a_mix(val_b, a, mix);
-		// printf("***********8**\n")
-		// display_list(a);
-		// printf("***********8**\n");
-
 		if (mix->total > ca + cb)
 		{
 			mix->value_b = val_b;
@@ -102,14 +99,6 @@ void best_mix(t_stack *b, t_stack *a, t_donne *mix)
 		}
 		b = b->next;
 	}
-	// printf(" \n value b : %d\n", mix->value_b);
-	// printf(" \n value a : %d\n", mix->value_a);
-	// printf(" \n cost_a : %d\n", mix->cost_a);
-	// printf(" \n cost_b : %d\n", mix->cost_b);
-	// // printf(" \n pos_a : %d\n", mix->pos_a);
-	// // printf(" \n pos_b : %d\n", mix->pos_b);
-	// printf(" \n mix->total : %d\n", mix->total);
-	
 }
 
 void	move_mix_a(t_stack **a, t_stack **b, t_donne *mix)

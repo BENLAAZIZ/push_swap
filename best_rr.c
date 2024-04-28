@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 19:35:10 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/26 19:01:57 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/28 15:17:21 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,43 +25,37 @@ int get_cost_rr(t_stack *x, int value, int size)
 		x = x->next;
 		i++;
 	}
+	// printf(" == i : %d \n", i);
 	return (i);
 }
 int  get_cost_a_rr(int nbr, t_stack *a,  t_donne *best_rr)
 {
 	t_stack	*ptr;
 	int		value;
-	int		min;
+	// int		min;
 	int		i;
 
 	i = 0;
 	ptr = a;
 	value = ptr->content;
-	min = ptr->content;
+	// min = ptr->content;
 	while (ptr)
 	{
 		if (nbr < ptr->content )
 		{
-			if (nbr > value || value > ptr->content)
+			if (nbr > value || value >= ptr->content)
 			{
 				value = ptr->content;
 				i++;
 			}
 		}
-		if (min > ptr->content)
-			min = ptr->content;
 		ptr = ptr->next;
 	}
 	if (i == 0)
-	{
-		best_rr->value_a_modif = min;
-		return (get_cost_mix(a, min, size_stack(a)));
-	}
+		best_rr->value_a_modif = get_min(a);
 	else
-	{
 		best_rr->value_a_modif = value;
-		return (get_cost_mix(a, value, size_stack(a)));
-	}
+	return (get_cost_rr(a, best_rr->value_a_modif, size_stack(a)));
 }
 
 void best_rr(t_stack *b, t_stack *a, t_donne *best_rr)
@@ -69,6 +63,7 @@ void best_rr(t_stack *b, t_stack *a, t_donne *best_rr)
 	int	size;
 	int	ca;
 	int	cb;
+	int val_b;
 
 	best_rr->cost_b = -1;
 	best_rr->cost_a = -1;
@@ -76,13 +71,15 @@ void best_rr(t_stack *b, t_stack *a, t_donne *best_rr)
 	cb = -1;
 	size = size_stack(b);
     best_rr->total = 100000;
+	t_stack *tmp = b;
 	while (b)
 	{
-		cb = get_cost_rr(b, b->content, size);
-		ca = get_cost_a_rr(b->content, a, best_rr);
+		val_b = b->content;
+		cb = get_cost_rr(tmp, val_b, size);
+		ca = get_cost_a_rr(val_b, a, best_rr);
 		if (best_rr->total > ca && best_rr->total > cb)
 		{
-			best_rr->value_b = b->content;
+			best_rr->value_b = val_b;
 			best_rr->value_a = best_rr->value_a_modif;
 			best_rr->cost_b = cb;
 			best_rr->cost_a = ca;

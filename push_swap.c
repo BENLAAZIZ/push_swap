@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 02:58:46 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/27 17:50:24 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:03:43 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void display_list(t_stack *a)
 	{
 		// printf(" ( content : %d order : (%d))\n", a->content, a->ord);
 		// printf("|   %d    (%d)      |\n", a->content, a->ord);
-		printf("%d\n", a->content);
+		printf("|  %d  |\n", a->content);
 		a = a->next;
 	}
 	printf("\n");
@@ -125,9 +125,6 @@ void	get_order(t_stack **a)
     }
 }
 
-
-// move mix to a **************************************************
-
 int	get_position(t_stack *ptr, int value)
 {
 	int i = 0;
@@ -141,34 +138,51 @@ int	get_position(t_stack *ptr, int value)
 	return (i);
 }
 
-// // fin move mix to a **************************************************
 void	move_action(t_stack **a, t_stack **b)
 {
 	t_donne	mix;
 	t_donne	rr;
 	t_donne	rrr;
 	
-	rr.total =  10000;
-	rrr.total =  10000;
+	// rr.total =  10000;
+	// rrr.total =  1000000000;
 	// mix.total =  10000;
+
 	while (b && *b)
 	{
-		// puts("----------------------------------");
-		// display_list(*a);
-		// display_list(*b);
+			// puts("------- stack A --------");
+			// display_list(*a);
+			// puts("------- stack B --------");
+			// display_list(*b);
 		best_mix(*b, *a, &mix);
-		move_mix_a(a, b, &mix);
-		// best_rr(*b, *a, &rr);
-		// 	move_rr_a(a, b, &rr);
-		//******************************
-		// best_rr(*b, *a, &rr);
-		// best_rrr(*b, *a, &rrr);
-		// if (mix.total < rr.total && mix.total < rrr.total)
-		// 	move_mix_a(a, b, &mix);
-		// else if (rr.total < mix.total && rr.total < rrr.total)
-		// 	move_rr_a(a, b, &rr);
-		// else
-		// 	move_rrr_a(a, b, &rrr);
+			// puts("------- best mix --------");
+			// printf("\n mix->valu_b : %d\n", mix.value_b);
+			// printf("\n mix->valu_a : %d\n", mix.value_a);
+			// printf("\n mix->cost_b : %d\n", mix.cost_b);
+			// printf("\n mix->cost_a : %d\n", mix.cost_a);
+			// printf("\n mix->total : %d\n\n", mix.total);
+		best_rr(*b, *a, &rr);
+			// puts("------- best rr --------");
+			// printf("\n rr->valu_b : %d\n", rr.value_b);
+			// printf("\n rr->valu_a : %d\n", rr.value_a);
+			// printf("\n rr->cost_b : %d\n", rr.cost_b);
+			// printf("\n rr->cost_a : %d\n", rr.cost_a);
+			// printf("\n rr->total : %d\n\n", rr.total);
+		best_rrr(*b, *a, &rrr);
+		// 	puts("------- best rrr --------");
+		// 	printf("\n rrr->valu_b : %d\n", rrr.value_b);
+		// 	printf("\n rrr->valu_a : %d\n", rrr.value_a);
+		// 	printf("\n rrr->cost_b : %d\n", rrr.cost_b);
+		// 	printf("\n rrr->cost_a : %d\n", rrr.cost_a);
+		// 	printf("\n rrr->total : %d\n\n", rrr.total);
+		// puts("===============================");
+
+		if (rr.total <= mix.total && rr.total <= rrr.total)
+			move_rr_a(a, b, &rr);
+		else if (rrr.total <= mix.total && rrr.total <= rr.total)
+			move_rrr_a(a, b, &rrr);
+		else
+			move_mix_a(a, b, &mix);
 	}
 }
 
@@ -181,10 +195,7 @@ void	sort_all(t_stack **a, t_stack **b)
 	ptr = *a;
 	size = size_stack(*a);
 	mid = size / 2;
-	// printf("mid: %d\n", mid);
 	get_order(a);
-	// display_list(*a);
-	// puts("--------");
 	while (size > 3)
 	{
 		if ((*a)->ord <= mid)
@@ -197,9 +208,6 @@ void	sort_all(t_stack **a, t_stack **b)
 		size--;
 	}
 	sort_3(a);
-	// display_list(*a);
-	// display_list(*b);
-	// pause();
 	move_action(a, b);
 }
 
@@ -245,6 +253,5 @@ int main(int ac, char **av)
 			rra(&a, 1);
 	}
 	// display_list(a);
-	
 	return 0;
 }
