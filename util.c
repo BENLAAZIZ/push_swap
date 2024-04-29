@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 19:22:53 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 22:38:43 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 22:55:45 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	rrr(t_stack **a, t_stack **b, int flag)
 
 int	get_position(t_stack *ptr, int value)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (ptr)
 	{
 		if (ptr->content == value)
@@ -63,5 +65,5 @@ void	best_mix_init(t_stack *b, t_donne *mix, t_var *var)
 	var->ca = -1;
 	var->cb = -1;
 	var->size = size_stack(b);
-    mix->total = 100000;
+	mix->total = 100000;
 }

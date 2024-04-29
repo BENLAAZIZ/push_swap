@@ -6,15 +6,15 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 19:17:55 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 21:34:14 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 22:32:02 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int get_cost_mix(t_stack *x, int value, int size)
+int	get_cost_mix(t_stack *x, int value, int size)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < size)
@@ -29,7 +29,7 @@ int get_cost_mix(t_stack *x, int value, int size)
 	return (size - i);
 }
 
-int  get_cost_a_mix(int nbr, t_stack *a, t_donne *mix)
+int	get_cost_a_mix(int nbr, t_stack *a, t_donne *mix)
 {
 	t_stack	*ptr;
 	int		value;
@@ -53,13 +53,13 @@ int  get_cost_a_mix(int nbr, t_stack *a, t_donne *mix)
 	if (i == 0)
 		mix->value_a_modif = get_min(a);
 	else
-		mix->value_a_modif = value;		
+		mix->value_a_modif = value;
 	return (get_cost_mix(a, mix->value_a_modif, size_stack(a)));
 }
 
-void best_mix(t_stack *b, t_stack *a, t_donne *mix)
+void	best_mix(t_stack *b, t_stack *a, t_donne *mix)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 	t_var	var;
 
 	best_mix_init(b, mix, &var);

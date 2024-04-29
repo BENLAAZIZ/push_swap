@@ -6,12 +6,11 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 22:32:12 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/29 16:37:20 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 22:21:58 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 static int	count_word(const char *s, char c)
 {

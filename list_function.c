@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 02:11:28 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/29 16:50:27 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 22:38:47 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_stack	*ft_lstnew(int content)
 {
 	t_stack	*node;
-	
+
 	node = malloc(sizeof(t_stack));
 	if (node == NULL)
 		return (NULL);
@@ -64,8 +64,8 @@ void	ft_lstadd_back(t_stack **lst, t_stack *new)
 int	size_stack(t_stack *a)
 {
 	int		size;
-	
-	if(!a)
+
+	if (!a)
 		return (-1);
 	size = 0;
 	while (a)

@@ -6,19 +6,17 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 18:36:14 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 19:30:10 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 22:39:48 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "push_swap.h"
-
 
 void	ra(t_stack **a, int flag)
 {
 	t_stack	*last;
 	t_stack	*ptr;
-	
+
 	if (!(*a) || !(*a)->next)
 		return ;
 	last = ft_lstlast(*a);

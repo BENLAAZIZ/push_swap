@@ -6,12 +6,11 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 01:24:39 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/29 20:48:29 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 22:38:00 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 int	get_arg(char **v, t_stack **stack)
 {
@@ -53,9 +52,9 @@ int	ft_isdigit(char *s)
 
 int	is_duplicated(t_stack *head, int value)
 {
-	while(head)
+	while (head)
 	{
-		if(head->content == value)
+		if (head->content == value)
 			return (1);
 		head = head -> next;
 	}
@@ -74,9 +73,9 @@ void	check_nbr(char **buf, t_stack **stack)
 		if (!ft_isdigit(buf[i]))
 			free_split_and_stack(stack, buf);
 		nbr = ft_atoi(buf[i]);
-		if (nbr <  -2147483648  || nbr > 2147483647)
+		if (nbr < -2147483648 || nbr > 2147483647)
 			free_split_and_stack(stack, buf);
-		if(is_duplicated(*stack, (int)nbr))
+		if (is_duplicated(*stack, (int)nbr))
 			free_split_and_stack(stack, buf);
 		new = ft_lstnew((int)nbr);
 		if (!new)
@@ -88,11 +87,11 @@ void	check_nbr(char **buf, t_stack **stack)
 
 int	is_sorted(t_stack *a)
 {
-	if(!a || !a->next)
+	if (!a || !a->next)
 		return (1);
-	while(a->next)
+	while (a->next)
 	{
-		if(a->content > a->next->content)
+		if (a->content > a->next->content)
 			return (0);
 		a = a -> next;
 	}

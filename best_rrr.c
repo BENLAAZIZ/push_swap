@@ -6,16 +6,16 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 13:23:47 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 22:35:29 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 22:35:03 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int get_cost_rrr(t_stack *x, int value, int size)
+int	get_cost_rrr(t_stack *x, int value, int size)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (i < size)
 	{
@@ -29,7 +29,7 @@ int get_cost_rrr(t_stack *x, int value, int size)
 	return (size - i);
 }
 
-int  get_cost_a_rrr(int nbr, t_stack *a, t_donne *rrr)
+int	get_cost_a_rrr(int nbr, t_stack *a, t_donne *rrr)
 {
 	t_stack	*ptr;
 	int		value;
@@ -40,7 +40,7 @@ int  get_cost_a_rrr(int nbr, t_stack *a, t_donne *rrr)
 	value = ptr->content;
 	while (ptr)
 	{
-		if (nbr < ptr->content )
+		if (nbr < ptr->content)
 		{
 			if (nbr > value || value >= ptr->content)
 			{
@@ -59,18 +59,17 @@ int  get_cost_a_rrr(int nbr, t_stack *a, t_donne *rrr)
 
 void	best_rrr_init(t_stack *b, t_donne *best_rrr, t_var *var)
 {
-	
 	best_rrr->cost_b = -1;
 	best_rrr->cost_a = -1;
 	var->ca = -1;
 	var->cb = -1;
 	var->size = size_stack(b);
-    best_rrr->total = 100000;
+	best_rrr->total = 100000;
 }
 
-void best_rrr(t_stack *b, t_stack *a, t_donne *rrr)
+void	best_rrr(t_stack *b, t_stack *a, t_donne *rrr)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 	t_var	var;
 
 	best_rrr_init(b, rrr, &var);
@@ -107,7 +106,7 @@ void	move_rrr_a(t_stack **a, t_stack **b, t_donne *best_rrr)
 		while (i++ < best_rrr->cost_a)
 			rra(a, 1);
 	}
-	else 
+	else
 	{
 		while (++i < best_rrr->cost_a)
 			rrr(a, b, 1);

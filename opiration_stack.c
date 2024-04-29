@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:24:53 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 19:16:38 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 22:24:14 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	sa(t_stack **a, int flag)
 {
 	int	tmp;
-	int ord;
+	int	ord;
 
 	if (!(*a) || !(*a)->next)
 		return ;
@@ -56,7 +56,7 @@ void	ss(t_stack **a, t_stack **b, int flag)
 
 void	pb(t_stack **a, t_stack **b, int flag)
 {
-	t_stack *ptr;
+	t_stack	*ptr;
 
 	if (!*a)
 		return ;
@@ -70,7 +70,7 @@ void	pb(t_stack **a, t_stack **b, int flag)
 
 void	pa(t_stack **a, t_stack **b, int flag)
 {
-	t_stack *ptr;
+	t_stack	*ptr;
 
 	if (!*b)
 		return ;
