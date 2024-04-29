@@ -2,7 +2,7 @@ NAME = push_swap
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror  
+CFLAGS = -Wall -Wextra -Werror 
 #-fsanitize=address
 
 RM = rm -f
@@ -20,7 +20,7 @@ $(NAME): $(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) -o $(NAME) 
 
 %.o: %.c push_swap.h
-		$(CC) $(CFLAGS)  -o $@ -c $<
+		$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
 		$(RM) $(OBJ)

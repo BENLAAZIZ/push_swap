@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 02:58:46 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 22:12:24 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 21:13:15 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void display_list(t_stack *a)
 {
 	while(a)
 	{
-		printf("|  %d  |\n", a->content);
+		printf("|  %d  (%d)|\n", a->content, a->ord);
 		a = a->next;
 	}
 	printf("\n");
@@ -87,8 +87,7 @@ void	final_operation(t_stack **a)
 	int	min;
 	int pos;
 	int size;
-	
-	
+
 	min = get_min(*a);
 	pos = get_position(*a, min);
 	size = size_stack(*a);
@@ -104,19 +103,29 @@ void	final_operation(t_stack **a)
 	}
 }
 
-int main(int ac, char **av)
+void	v()
+{
+	system("leaks push_swap");
+}
+
+int	main(int ac, char **av)
 {
 	t_stack *a;
 	t_stack *b;
-	
+
+	// atexit(v);
 	a = NULL;
 	b = NULL;
 	if (ac < 2)
 		return (0);
-	get_arg(av, &a);
+	if (get_arg(av, &a))
+		return (ft_print_error(&a), 0);
 	if(is_sorted(a))
-		return (0);
+		return (ft_clear_stack(&a), 0);
 	algorithme(&a, &b);
 	final_operation(&a);
+	// display_list(a);
+	ft_clear_stack(&a);
 	return 0;
 }
+// ./push_swap "  1 2 -2 +9   "     -9

@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 02:11:28 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 18:32:32 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:50:27 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_stack	*ft_lstnew(int content)
 	if (node == NULL)
 		return (NULL);
 	node->content = content;
+	node->ord = 0;
 	node->next = NULL;
 	return (node);
 }

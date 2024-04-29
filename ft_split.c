@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 22:32:12 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/01 22:35:06 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:37:20 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ char	**ft_split(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	nbr_wrd = count_word(s, c);
+	if (nbr_wrd == 0)
+		return (NULL);
 	array = (char **)malloc(sizeof(char *) * (nbr_wrd + 1));
 	if (array == NULL)
 		return (NULL);

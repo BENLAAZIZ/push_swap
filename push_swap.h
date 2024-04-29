@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 02:58:26 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 22:40:09 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 20:58:12 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,15 @@ typedef struct	s_stack
 	struct s_stack	*next;
 } t_stack;
 
-t_stack *ft_lstnew(int content);
+t_stack	*ft_lstnew(int content);
 t_stack	*ft_lstbefore_last(t_stack *lst);
 t_stack	*ft_lstlast(t_stack *lst);
+
 void	free_t_split(char **array);
-void	ft_print_error();
+void	ft_print_error(t_stack **stack);
+void	free_split_and_stack(t_stack **stack, char **array);
+void	ft_clear_stack(t_stack **stack);
+
 void	ft_lstadd_back(t_stack **lst, t_stack *new);
 void	check_nbr(char **buf, t_stack **stack);
 int		size_stack(t_stack *a);

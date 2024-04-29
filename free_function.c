@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 02:07:57 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 18:29:54 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 20:46:14 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,30 @@ void	free_t_split(char **array)
 	free(array);
 }
 
-void	ft_print_error()
+void	ft_print_error(t_stack **stack)
 {
 	write(1, "Error\n", 6);
-	exit(1);
+	ft_clear_stack(stack);
+	exit(0);
+}
+
+void	free_split_and_stack(t_stack **stack, char **array)
+{
+	free_t_split(array);
+	ft_print_error(stack);
+}
+
+void	ft_clear_stack(t_stack **stack)
+{
+	t_stack	*temp;
+
+	if (!stack || !*stack)
+		return ;
+	while (*stack)
+	{
+		temp = *stack;
+		*stack = (*stack)->next;
+		free(temp);
+	}
+	*stack = NULL;
 }

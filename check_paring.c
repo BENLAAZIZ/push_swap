@@ -6,30 +6,30 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 01:24:39 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/28 22:36:49 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/29 20:48:29 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 
-int get_arg(char **v, t_stack **stack)
+int	get_arg(char **v, t_stack **stack)
 {
 	char	**buf;
 	int		i;
 
 	i = 1;
 	if (!v)
-		return(0);
+		return (1);
 	while (v[i])
 	{
 		buf = ft_split(v[i], ' ');
 		if (!buf)
 			return (1);
 		check_nbr(buf, stack);
+		free_t_split(buf);
 		i++;
 	}
-	free_t_split(buf);
 	return (0);
 }
 
@@ -72,15 +72,15 @@ void	check_nbr(char **buf, t_stack **stack)
 	while (buf[i])
 	{
 		if (!ft_isdigit(buf[i]))
-			ft_print_error();
+			free_split_and_stack(stack, buf);
 		nbr = ft_atoi(buf[i]);
 		if (nbr <  -2147483648  || nbr > 2147483647)
-			ft_print_error();
+			free_split_and_stack(stack, buf);
 		if(is_duplicated(*stack, (int)nbr))
-			ft_print_error();
+			free_split_and_stack(stack, buf);
 		new = ft_lstnew((int)nbr);
 		if (!new)
-		 	ft_print_error();
+			free_split_and_stack(stack, buf);
 		ft_lstadd_back(stack, new);
 		i++;
 	}
