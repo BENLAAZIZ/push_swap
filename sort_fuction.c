@@ -6,7 +6,7 @@
 /*   By: hben-laz <hben-laz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 19:03:31 by hben-laz          #+#    #+#             */
-/*   Updated: 2024/04/29 22:54:10 by hben-laz         ###   ########.fr       */
+/*   Updated: 2024/04/30 13:21:23 by hben-laz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	get_order(t_stack **a)
 		max_node = NULL;
 		while (ptr)
 		{
-			if (ptr->ord == 0 && ptr->content > max)
+			if (ptr->ord == 0 && ptr->content >= max)
 			{
 				max = ptr->content;
 				max_node = ptr;
